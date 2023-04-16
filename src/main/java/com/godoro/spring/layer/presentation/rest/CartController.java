@@ -30,16 +30,28 @@ public class CartController {
 	@GetMapping("/get/{cartId}")
 	@CrossOrigin(origins = "http://localhost:3000")
 	public CartDto getCart(@PathVariable("cartId") long cartId) {	
+		try {
+			return cartService.find(cartId);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
-		
-		return cartService.find(cartId);
+		return null;
 			
 	}
 	
 	@PutMapping("/checkout")
 	@CrossOrigin(origins = "http://localhost:3000")
 	public void checkoutCart(@RequestBody CartDto cartDto) {	
-		cartService.checkout(cartDto);
+		try {
+
+			cartService.checkout(cartDto);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 			
 	}
 	

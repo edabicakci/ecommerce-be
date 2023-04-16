@@ -33,20 +33,27 @@ public class CartServiceImp implements CartService {
 
 	@Override
 	public void checkout(CartDto cartDto) {
-	
-		Optional<Cart> optional = cartRepository.findById(cartDto.getId());
-		if(optional.isPresent()) {
-			
-			Cart cart = optional.get();
-			CartStatus cartStatus = cart.getCartStatus();
-			
-			if(cartStatus == CartStatus.NEW) {
-				cart.setCardNumber(cartDto.getCardNumber());
-				cart.setCustomerName(cartDto.getCustomerName());
-				cart.setCartStatus(CartStatus.COMPLETED);
-				cartRepository.save(cart);
+		
+		try {
+			Optional<Cart> optional = cartRepository.findById(cartDto.getId());
+			if(optional.isPresent()) {
+				
+				Cart cart = optional.get();
+				CartStatus cartStatus = cart.getCartStatus();
+				
+				if(cartStatus == CartStatus.NEW) {
+					cart.setCardNumber(cartDto.getCardNumber());
+					cart.setCustomerName(cartDto.getCustomerName());
+					cart.setCartStatus(CartStatus.COMPLETED);
+					cartRepository.save(cart);
+				}
 			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
+	
+		
 		
 	}
 
@@ -54,38 +61,47 @@ public class CartServiceImp implements CartService {
 	// finds the cart and if doesn't exist, create one
 	@Override
 	public CartDto find(long cartId) {
-		Optional<Cart> optional = cartRepository.findById(cartId);
+		
+		try {
+			Optional<Cart> optional = cartRepository.findById(cartId);
 
-		if (optional.isPresent()) {
-			List<CartProduct> cartProducts = cartProductRepository.findAllByCartId(cartId);
-			
-			 CartDto cartDto = toDto(optional.get());
-			 List<CartProductDto> cartProductDtoList = new ArrayList<>();
-			 
-			 for(CartProduct cartProduct : cartProducts) {
-				 cartProductDtoList.add(cartProductService.toDto(cartProduct));
-			 }
-			 
-			 
-			 cartDto.setCartProductList(cartProductDtoList);
-			 
-			 
-			 return cartDto;
+			if (optional.isPresent()) {
+				List<CartProduct> cartProducts = cartProductRepository.findAllByCartId(cartId);
+				
+				 CartDto cartDto = toDto(optional.get());
+				 List<CartProductDto> cartProductDtoList = new ArrayList<>();
+				 
+				 for(CartProduct cartProduct : cartProducts) {
+					 cartProductDtoList.add(cartProductService.toDto(cartProduct));
+				 }
+				 
+				 
+				 cartDto.setCartProductList(cartProductDtoList);
+				 
+				 
+				 return cartDto;
 
-		} else {
-			
-			if(cartId == 0) {
-				CartDto cartDto = new CartDto();
-				cartDto.setCartStatus(CartStatus.NEW);
+			} else {
+				
+				if(cartId == 0) {
+					CartDto cartDto = new CartDto();
+					cartDto.setCartStatus(CartStatus.NEW);
 
-				Cart cart = cartRepository.save(toEntity(cartDto));
-				return toDto(cart);
+					Cart cart = cartRepository.save(toEntity(cartDto));
+					return toDto(cart);
+					
+				}
+				return null;
 				
 			}
-			return null;
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
 			
 		}
-
+		
+		return null;
 	}
 
 	private Cart toEntity(CartDto cartDto) {

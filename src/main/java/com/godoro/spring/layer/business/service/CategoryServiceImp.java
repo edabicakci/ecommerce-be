@@ -30,27 +30,41 @@ public class CategoryServiceImp implements CategoryService {
 
 	@Override
 	public CategoryDto find(long categoryId) {
-		Optional<Category> optional = categoryRepository.findById(categoryId);
+		
+		try {
+			Optional<Category> optional = categoryRepository.findById(categoryId);
 
-		if (optional.isPresent()) {
+			if (optional.isPresent()) {
 
-			return toDto(optional.get());
+				return toDto(optional.get());
+			}
+
+			return null;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
-
 		return null;
 	}
 
 	@Override
 	public List<CategoryDto> list() {
+		
+		try {
+			List<CategoryDto> categoryDtoList = new ArrayList<CategoryDto>();
 
-		List<CategoryDto> categoryDtoList = new ArrayList<CategoryDto>();
+			for (Category category : categoryRepository.findAll()) {
 
-		for (Category category : categoryRepository.findAll()) {
+				categoryDtoList.add(toDto(category));
 
-			categoryDtoList.add(toDto(category));
-
+			}
+			return categoryDtoList;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
-		return categoryDtoList;
+		return null;
+		
 	}
 
 	private CategoryDto toDto(Category category) {

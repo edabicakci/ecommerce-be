@@ -26,15 +26,27 @@ public class ProductController {
 	@CrossOrigin(origins = "http://localhost:3000")
 	public ProductDto getProduct(@PathVariable("id") long productId) {
 		
-		return productService.find(productId);
+		try {
+			return productService.find(productId);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
+		return null;
 	}
 	
 	@GetMapping("/products/{categoryId}")
 	@CrossOrigin(origins = "http://localhost:3000")
 	public List<ProductDto> getProductsByCategoryId(@PathVariable("categoryId") long categoryId) {
-		return productService.findByCategory(categoryId);
+		try {
+			return productService.findByCategory(categoryId);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
+		return null;
 		
 	}
 

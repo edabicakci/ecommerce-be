@@ -26,9 +26,14 @@ public class CategoryController {
 	@GetMapping("/categories")
 	@CrossOrigin(origins = "http://localhost:3000")
 	public List<CategoryDto> getCategories() {
+		try {
+			return categoryService.list();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
-		return categoryService.list();
-		
+		return null;	
 	}
 	
 	/*

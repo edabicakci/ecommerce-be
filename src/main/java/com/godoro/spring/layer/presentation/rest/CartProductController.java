@@ -25,18 +25,27 @@ public class CartProductController {
 	  
 	  @CrossOrigin(origins = "http://localhost:3000") 
 	  public void addCartProduct(@PathVariable("cartId") long cartId, @PathVariable("productId") long productId) {
-	  
-	  cartProductService.add(cartId, productId);
-	  
+		  
+		  try {
+			  cartProductService.add(cartId, productId);
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+
 	  }
 	  
 	  @DeleteMapping("/remove/{cartId}/{productId}")
 	  
-	  @CrossOrigin(origins = "http://localhost:3000") public void
-	  deleteCartProduct(@PathVariable("cartId") long
-	  cartId, @PathVariable("productId") long productId) {
-	  
-	  cartProductService.remove(cartId, productId);
+	  @CrossOrigin(origins = "http://localhost:3000") 
+	  public void deleteCartProduct(@PathVariable("cartId") long cartId, @PathVariable("productId") long productId) {
+		  
+		try {
+			cartProductService.remove(cartId, productId);
+				
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	  
 	  }
 	 
@@ -44,8 +53,15 @@ public class CartProductController {
 	  
 	  @CrossOrigin(origins = "http://localhost:3000") 
 	  public void deleteCartProductOne(@PathVariable("cartId") long cartId, @PathVariable("productId") long productId) {
+		  
+			try {
+				 cartProductService.removeOneItem(cartId, productId);
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
 	  
-	  cartProductService.removeOneItem(cartId, productId);
+	 
 	  
 	  }
 	

@@ -29,66 +29,86 @@ public class CartProductServiceImp implements CartProductService {
 
 	@Override
 	public void add(long cartId, long productId) {
+		
+		try {
+			CartProduct cartProduct = cartProductRepository.findByCartIdAndProductId(cartId, productId);
 
-		CartProduct cartProduct = cartProductRepository.findByCartIdAndProductId(cartId, productId);
+			if (cartProduct != null) {
 
-		if (cartProduct != null) {
+				Optional<Cart> optionalCart = cartRepository.findById(cartId);
+				Optional<Product> optionalProduct = productRepository.findById(productId);
 
-			Optional<Cart> optionalCart = cartRepository.findById(cartId);
-			Optional<Product> optionalProduct = productRepository.findById(productId);
-
-			int salesQuantity = cartProduct.getSalesQuantity();
-			cartProduct.setSalesQuantity(salesQuantity + 1);
-			cartProduct.setCart(optionalCart.get());
-			cartProduct.setProduct(optionalProduct.get());
-
-			cartProductRepository.save(cartProduct);
-
-		} else {
-
-			cartProduct = new CartProduct();
-
-			Optional<Cart> optionalCart = cartRepository.findById(cartId);
-			Optional<Product> optionalProduct = productRepository.findById(productId);
-
-			if (optionalCart.isPresent() && optionalProduct.isPresent()) {
-
+				int salesQuantity = cartProduct.getSalesQuantity();
+				cartProduct.setSalesQuantity(salesQuantity + 1);
 				cartProduct.setCart(optionalCart.get());
 				cartProduct.setProduct(optionalProduct.get());
-				cartProduct.setSalesQuantity(1);
 
 				cartProductRepository.save(cartProduct);
 
-			}
+			} else {
 
+				cartProduct = new CartProduct();
+
+				Optional<Cart> optionalCart = cartRepository.findById(cartId);
+				Optional<Product> optionalProduct = productRepository.findById(productId);
+
+				if (optionalCart.isPresent() && optionalProduct.isPresent()) {
+
+					cartProduct.setCart(optionalCart.get());
+					cartProduct.setProduct(optionalProduct.get());
+					cartProduct.setSalesQuantity(1);
+
+					cartProductRepository.save(cartProduct);
+
+				}
+
+			}	
+			
+		} catch(Exception e ) {
+			e.printStackTrace();
 		}
 
+		
 	}
 
 	@Override
 	public void remove(long cartId, long productId) {
+		
+		try {
 
-		CartProduct cartProduct = cartProductRepository.findByCartIdAndProductId(cartId, productId);
+			CartProduct cartProduct = cartProductRepository.findByCartIdAndProductId(cartId, productId);
 
-		if (cartProduct != null) {
+			if (cartProduct != null) {
 
-			cartProductRepository.deleteById(cartProduct.getId());
+				cartProductRepository.deleteById(cartProduct.getId());
 
+			}	
+			
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
+
 
 	}
 	
 	@Override
 	public void removeOneItem(long cartId, long productId) {
 		// TODO Auto-generated method stub
-		CartProduct cartProduct = cartProductRepository.findByCartIdAndProductId(cartId, productId);
-		if (cartProduct != null) {
+		
+		try {
+			CartProduct cartProduct = cartProductRepository.findByCartIdAndProductId(cartId, productId);
+			if (cartProduct != null) {
+				
+				cartProduct.setSalesQuantity(cartProduct.getSalesQuantity() - 1 );
+
+				cartProductRepository.save(cartProduct);
+			}
+
 			
-			cartProduct.setSalesQuantity(cartProduct.getSalesQuantity() - 1 );
-
-			cartProductRepository.save(cartProduct);
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
-
+		
 		
 	}
 	

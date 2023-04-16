@@ -32,16 +32,23 @@ public class ProductServiceImp implements ProductService {
 
 	@Override
 	public List<ProductDto> findByCategory(long categoryId) {
+		
+		try {
+			List<ProductDto> productDtoList = new ArrayList<ProductDto>();
 
-		List<ProductDto> productDtoList = new ArrayList<ProductDto>();
+			for (Product product : productRepository.findByCategoryId(categoryId)) {
 
-		for (Product product : productRepository.findByCategoryId(categoryId)) {
+				productDtoList.add(toDto(product));
 
-			productDtoList.add(toDto(product));
+			}
 
+			return productDtoList;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
 
-		return productDtoList;
+		return null;
 	}
 
 	private ProductDto toDto(Product product) {
