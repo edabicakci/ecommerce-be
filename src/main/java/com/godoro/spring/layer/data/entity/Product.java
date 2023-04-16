@@ -23,6 +23,15 @@ public class Product {
 	private long id;
 	private String productName;
 	private double salesPrice;
+	private String imgPathProduct;
+
+	public String getImgPathProduct() {
+		return imgPathProduct;
+	}
+
+	public void setImgPathProduct(String imgPathProduct) {
+		this.imgPathProduct = imgPathProduct;
+	}
 
 	@JsonIgnore
 	@ManyToOne

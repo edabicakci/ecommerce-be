@@ -40,6 +40,14 @@ public class CartProductController {
 	  
 	  }
 	 
+	  @PostMapping("/removeOneItem/{cartId}/{productId}")
+	  
+	  @CrossOrigin(origins = "http://localhost:3000") 
+	  public void deleteCartProductOne(@PathVariable("cartId") long cartId, @PathVariable("productId") long productId) {
+	  
+	  cartProductService.removeOneItem(cartId, productId);
+	  
+	  }
 	
 	
 	

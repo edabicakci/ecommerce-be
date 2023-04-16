@@ -12,6 +12,7 @@ public class ProductDto {
 	private String productName;
 	private double salesPrice;
 	private Category category;
+	private String imgPathProduct;
 
 	/*
 	 * private List<CartProduct> cartProduct;
@@ -22,6 +23,12 @@ public class ProductDto {
 	 * cartProduct; }
 	 */
 	
+	public String getImgPathProduct() {
+		return imgPathProduct;
+	}
+	public void setImgPathProduct(String imgPathProduct) {
+		this.imgPathProduct = imgPathProduct;
+	}
 	public String getProductName() {
 		return productName;
 	}

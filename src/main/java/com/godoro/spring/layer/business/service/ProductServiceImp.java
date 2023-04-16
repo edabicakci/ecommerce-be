@@ -51,6 +51,7 @@ public class ProductServiceImp implements ProductService {
 		productDto.setSalesPrice(product.getSalesPrice());
 		//productDto.setCartProduct(product.getCartProduct());
 		productDto.setCategory(product.getCategory());
+		productDto.setImgPathProduct(product.getImgPathProduct());
 
 		return productDto;
 	}

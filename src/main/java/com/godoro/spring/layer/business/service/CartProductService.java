@@ -6,9 +6,11 @@ import com.godoro.spring.layer.data.entity.CartProduct;
 public interface CartProductService {
 	
 	  
-	  void add(long cartId, long productId); void remove (long cartProductId, long
-	  productId);
+	  void add(long cartId, long productId); 
+	  void remove (long cartId, long productId);
+	  void removeOneItem(long cartId, long productId);
 	  CartProductDto toDto(CartProduct cartProduct);
+	
 	 
 
 }
