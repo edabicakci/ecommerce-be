@@ -2,7 +2,9 @@ package com.godoro.spring.layer.data.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -14,28 +16,31 @@ import jakarta.persistence.OneToOne;
 public class CartProduct {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long cartProductId;
+	private long id;
 	
 	@JsonIgnore
-	@ManyToOne
+	@ManyToOne(fetch= FetchType.LAZY)
 	@JoinColumn(name="cart_id")
 	private Cart cart;
 	
 	//private long productId;
 	
-	@JsonIgnore
-	@OneToOne
-	@JoinColumn(name="product_id")
+	  @JsonIgnore
+	
+	  @ManyToOne (fetch= FetchType.EAGER)
+	  
+	 @JoinColumn(name="product_id")
 	private Product product;
 	
 	private int salesQuantity;
 	
 	
-	public long getCartProductId() {
-		return cartProductId;
+	
+	public long getId() {
+		return id;
 	}
-	public void setCartProductId(long cartProductId) {
-		this.cartProductId = cartProductId;
+	public void setId(long id) {
+		this.id = id;
 	}
 	public Cart getCart() {
 		return cart;
@@ -43,11 +48,11 @@ public class CartProduct {
 	public void setCart(Cart cart) {
 		this.cart = cart;
 	}
-	public long getProductId() {
-		return productId;
+	public Product getProduct() {
+		return product;
 	}
-	public void setProductId(long productId) {
-		this.productId = productId;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 	public int getSalesQuantity() {
 		return salesQuantity;

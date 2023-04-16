@@ -7,31 +7,33 @@ import com.godoro.spring.layer.data.entity.CartProduct;
 
 public class CartDto {
 	
-	private long cartId;
+	private long id;
 	private String customerName;
 	private String cardNumber;
 	private CartStatus cartStatus;
+	private List<CartProductDto> cartProductList;
+	  
+	  
+	public List<CartProductDto> getCartProductList() { 
+		return cartProductList; 
+	}
 	
-	private List<CartProduct> cartProductList;
+	public void setCartProductList(List<CartProductDto> cartProductList) {
+	  this.cartProductList = cartProductList; 
+	}
+	 
 	
-	
-	public List<CartProduct> getCartProductList() {
-		return cartProductList;
-	}
-	public void setCartProductList(List<CartProduct> cartProductList) {
-		this.cartProductList = cartProductList;
-	}
-	public long getCartId() {
-		return cartId;
-	}
-	public void setCartId(long cartId) {
-		this.cartId = cartId;
-	}
 	public String getCustomerName() {
 		return customerName;
 	}
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
+	}
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
 	}
 	public String getCardNumber() {
 		return cardNumber;

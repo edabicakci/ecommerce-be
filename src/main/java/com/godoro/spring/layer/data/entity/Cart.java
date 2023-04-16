@@ -16,29 +16,33 @@ import jakarta.persistence.OneToMany;
 public class Cart {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long cartId;
+	private long id;
 	private String customerName;
 	private String cardNumber;
 	private CartStatus cartStatus;
 	
-	@OneToMany(mappedBy="cart", cascade= CascadeType.ALL, fetch= FetchType.EAGER)
-	private List<CartProduct> cartProductList;
+	/*
+	 * @OneToMany(mappedBy="cart", cascade= CascadeType.ALL, fetch= FetchType.EAGER)
+	 * private List<CartProduct> cartProductList;
+	 */
 	
 	
-	public long getCartId() {
-		return cartId;
-	}
-	public List<CartProduct> getCartProductList() {
-		return cartProductList;
-	}
-	public void setCartProductList(List<CartProduct> cartProductList) {
-		this.cartProductList = cartProductList;
-	}
-	public void setCartId(long cartId) {
-		this.cartId = cartId;
-	}
+	
+
+	/*
+	 * public List<CartProduct> getCartProductList() { return cartProductList; }
+	 * public void setCartProductList(List<CartProduct> cartProductList) {
+	 * this.cartProductList = cartProductList; }
+	 */
+	
 	public String getCustomerName() {
 		return customerName;
+	}
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
 	}
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;

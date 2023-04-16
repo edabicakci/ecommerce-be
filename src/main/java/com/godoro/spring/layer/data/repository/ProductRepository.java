@@ -8,6 +8,6 @@ import com.godoro.spring.layer.data.entity.Product;
 
 public interface ProductRepository extends CrudRepository<Product,Long>{
 	
-	List<Product> findByCategory_categoryId(long categoryId);
+	List<Product> findByCategoryId(long categoryId);
 
 }

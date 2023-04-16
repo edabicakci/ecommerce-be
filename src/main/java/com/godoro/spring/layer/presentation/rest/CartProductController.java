@@ -20,21 +20,26 @@ public class CartProductController {
 		
 	}
 	
-	@PostMapping("/add/{cartId}/{productId}")
-	@CrossOrigin(origins = "http://localhost:3000")
-	public void addCartProduct(@PathVariable("cartId") long cartId, @PathVariable("productId") long productId) {
-		
-		cartProductService.add(cartId, productId);
-			
-	}
 	
-	@DeleteMapping("/remove/{cartId}/{productId}")
-	@CrossOrigin(origins = "http://localhost:3000")
-	public void deleteCartProduct(@PathVariable("cartId") long cartId, @PathVariable("productId") long productId) {
-		
-		cartProductService.remove(cartId, productId);
-			
-	}
+	  @PostMapping("/add/{cartId}/{productId}")
+	  
+	  @CrossOrigin(origins = "http://localhost:3000") 
+	  public void addCartProduct(@PathVariable("cartId") long cartId, @PathVariable("productId") long productId) {
+	  
+	  cartProductService.add(cartId, productId);
+	  
+	  }
+	  
+	  @DeleteMapping("/remove/{cartId}/{productId}")
+	  
+	  @CrossOrigin(origins = "http://localhost:3000") public void
+	  deleteCartProduct(@PathVariable("cartId") long
+	  cartId, @PathVariable("productId") long productId) {
+	  
+	  cartProductService.remove(cartId, productId);
+	  
+	  }
+	 
 	
 	
 	

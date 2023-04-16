@@ -55,9 +55,9 @@ public class CategoryServiceImp implements CategoryService {
 
 	private CategoryDto toDto(Category category) {
 		CategoryDto categoryDto = new CategoryDto();
-		categoryDto.setCategoryId(category.getCategoryId());
+		categoryDto.setId(category.getId());
 		categoryDto.setCategoryName(category.getCategoryName());
-		categoryDto.setProductList(category.getProductList());
+		//categoryDto.setProductList(category.getProductList());
 		categoryDto.setImgPath(category.getImgPath());
 		return categoryDto;
 	}

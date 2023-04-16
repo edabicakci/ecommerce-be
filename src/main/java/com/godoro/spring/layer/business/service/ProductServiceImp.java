@@ -35,7 +35,7 @@ public class ProductServiceImp implements ProductService {
 
 		List<ProductDto> productDtoList = new ArrayList<ProductDto>();
 
-		for (Product product : productRepository.findByCategory_categoryId(categoryId)) {
+		for (Product product : productRepository.findByCategoryId(categoryId)) {
 
 			productDtoList.add(toDto(product));
 
@@ -46,9 +46,10 @@ public class ProductServiceImp implements ProductService {
 
 	private ProductDto toDto(Product product) {
 		ProductDto productDto = new ProductDto();
-		productDto.setProductId(product.getProductId());
+		productDto.setId(product.getId());
 		productDto.setProductName(product.getProductName());
 		productDto.setSalesPrice(product.getSalesPrice());
+		//productDto.setCartProduct(product.getCartProduct());
 		productDto.setCategory(product.getCategory());
 
 		return productDto;

@@ -1,33 +1,34 @@
 package com.godoro.spring.layer.business.dto;
 
 import com.godoro.spring.layer.data.entity.Cart;
+import com.godoro.spring.layer.data.entity.Product;
 
 public class CartProductDto {
 	
-	private long cartProductId;
-	private Cart cart;
-	private long productId;
+	private long id;
+	private long cartId;
+	private Product product;
 	private int salesQuantity;
 	
 	
+	public long getId() {
+		return id;
+	}
+	public long getCartId() {
+		return cartId;
+	}
+	public void setCartId(long cartId) {
+		this.cartId = cartId;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
 	
-	public long getCartProductId() {
-		return cartProductId;
+	public Product getProduct() {
+		return product;
 	}
-	public void setCartProductId(long cartProductId) {
-		this.cartProductId = cartProductId;
-	}
-	public Cart getCart() {
-		return cart;
-	}
-	public void setCart(Cart cart) {
-		this.cart = cart;
-	}
-	public long getProductId() {
-		return productId;
-	}
-	public void setProductId(long productId) {
-		this.productId = productId;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 	public int getSalesQuantity() {
 		return salesQuantity;
